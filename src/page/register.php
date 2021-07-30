@@ -1,11 +1,21 @@
 <?php
-     $title = "Register";
+    $title = "Register";
     require "../../src/common/template.php";
     require "../../src/function/function.php";
     require "../../src/function/dbLogin.php";
     require "../../src/function/dbFunction.php";
+ 
+    // if (isset($_SESSION["mdpfalse"]) && $_SESSION["mdpfalse"] == true){
+
+    //     $mdpfalse = $_SESSION["mdpfalse"];
+    //     $_SESSION["mdpfalse"] = false;
+        
+    // } else {
+    //     $mdpfalse = false;    
+    // }
 
     if(isset($_POST["prenom"]) && !empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["mdp2"])) {
+        
 
         $option = array(
 
@@ -37,22 +47,25 @@
             // mdp envoyer
             $mdpToSend = $mdpHash . $sel;
 
-
+            // $mdpfalse = false;
+            
         } else {
 
             //boolen de controle
-            echo "mdp pas correct lol";
+            // $mdpfalse = true;
             // j'active une session pour dire que les mdp sont pas correct
-
+            $_SESSION["mdpfalse"] = true;
             //recharger ma page
-            /* header("../../src/page/register.php");
-            exit(); */
+            header("location: ../../src/page/register.php?error=true&msg=Le mot de passe est incorrect");
+            exit();
 
         }
 
 
         dbRegister($nom, $prenom, $login, $email, $mdpToSend, $clef, $roleId);
-    }
+        header("location: ../../src/page/login.php");
+        exit();
+    } else {
     
 
 ?>
@@ -63,6 +76,13 @@
 
 <section class="formulaire">
     <form action="" method="post" enctype="multipart/form-data">
+
+        <?php 
+        
+            if (isset($_GET["error"]) && $_GET["error"] == true) {
+                echo "<h2>".$_GET['msg']."</h2>";
+            }
+        ?>
         <table>
             <thead>
                 <tr>
@@ -107,6 +127,7 @@
 </section>
 
 <?php
+        }
     require "../../src/common/footer.php"
 ?>
 </body>
