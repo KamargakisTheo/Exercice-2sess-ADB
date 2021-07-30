@@ -9,7 +9,7 @@ body {
 }
  /*Nav*/
 nav{
-    background-color: rgb(114, 244, 248);
+    background-color: rgba(174, 252, 255, 0.75);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -118,7 +118,7 @@ nav a:hover{
 footer{
     text-align: center;
     padding: 1rem;
-    background-color: rgb(114, 244, 248);
+    background-color: rgb(145, 217, 219);
 }
 
 footer > p{
