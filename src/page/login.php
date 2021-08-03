@@ -1,6 +1,15 @@
 <?php
     $title = "Login";
     require "../../src/common/template.php";
+    require "../../src/function/dbLogin.php";
+    require "../../src/function/dbFunction.php";
+
+    if(isset($_POST["pseudo"]) && !empty($_POST["pseudo"]) && !empty($_POST["mdp"])) {
+
+    login($_POST["pseudo"], $_POST["mdp"]);
+
+    }
+
 ?>
 
 

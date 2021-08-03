@@ -5,15 +5,16 @@
     require "../../src/function/dbLogin.php";
     require "../../src/function/dbFunction.php";
  
-    // if (isset($_SESSION["mdpfalse"]) && $_SESSION["mdpfalse"] == true){
+    if (isset($_SESSION["mdpFalse"]) && $_SESSION["mdpFalse"] == true){
 
-    //     $mdpfalse = $_SESSION["mdpfalse"];
-    //     $_SESSION["mdpfalse"] = false;
+         $mdpFalse = $_SESSION["mdpFalse"];
+         $_SESSION["mdpFalse"] = false;
         
-    // } else {
-    //     $mdpfalse = false;    
-    // }
+     } else {
+         $mdpFalse = false;    
+     }
 
+    
     if(isset($_POST["prenom"]) && !empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["pseudo"]) && !empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["mdp2"])) {
         
 
@@ -47,29 +48,64 @@
             // mdp envoyer
             $mdpToSend = $mdpHash . $sel;
 
-            // $mdpfalse = false;
+            $mdpFalse = false;
             
         } else {
 
-            //boolen de controle
+              // booleen de controle
+
+              $mdpFalse = true;
+
+              // J'active une session pour dire que les mdp sont pas correct
+  
+              $_SESSION["mdpFalse"] = true;
+  
+              // recharger ma page
+  
+              header("location: ../../src/page/register.php");
+  
+              exit();
+
+            /* //boolen de controle
             // $mdpfalse = true;
             // j'active une session pour dire que les mdp sont pas correct
             $_SESSION["mdpfalse"] = true;
             //recharger ma page
             header("location: ../../src/page/register.php?error=true&msg=Le mot de passe est incorrect");
-            exit();
+            exit(); */
 
         }
+        
+        dbCheckRegister($email, $login);
 
+        
+        
+        /* $bdd = dbAccess();
+        $requete = $bdd->prepare("SELECT COUNT (*) AS x FROM users WHERE email = ? OR login = ? ");
+        $requete->execute(array($email, $login)) or die (print_r($requete->errorInfo(), true));
 
-        dbRegister($nom, $prenom, $login, $email, $mdpToSend, $clef, $roleId);
+        while($result = $requete->fetch()) {
+
+            if ($result["x"] != 0) {
+
+                $accountExist = true;
+                
+                header("location: ../../src/page/register.php?errorAccount=true&message=Le login et/ou l'email existe déja.");
+
+                exit();
+            }
+        } */
+
+        dbRegister($nom, $prenom, $login, $email, $mdpToSend, $clef, $roleId, $sel);
+
         header("location: ../../src/page/login.php");
+
         exit();
+
     } else {
     
 
 ?>
-
 
 
 <body>
@@ -78,10 +114,27 @@
     <form action="" method="post" enctype="multipart/form-data">
 
         <?php 
-        
-            if (isset($_GET["error"]) && $_GET["error"] == true) {
-                echo "<h2>".$_GET['msg']."</h2>";
+
+            if($mdpFalse == true)
+
+            {
+    
+                echo "<h2>Les mots de passe ne sont pas identique.</h2>";
+    
+                $mdpFalse = false;
             }
+
+            if(isset($_GET["errorAccount"]) && $_GET["errorAccount"] == true) {
+
+                echo "<h2>" . $_GET["msg"] . "</h2>";
+            }
+
+            
+
+        
+           /*  if (isset($_GET["error"]) && $_GET["error"] == true) {
+                echo "<h2>".$_GET['msg']."</h2>";
+            } */
         ?>
         <table>
             <thead>
