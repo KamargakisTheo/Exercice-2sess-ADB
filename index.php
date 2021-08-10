@@ -4,4 +4,5 @@
     require "./src/common/moreNews.php";
     require "./src/common/news.php";
     require "./src/common/footer.php";
+
 ?>

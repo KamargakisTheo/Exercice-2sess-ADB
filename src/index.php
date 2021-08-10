@@ -1,7 +1,6 @@
 <?php
     $title = "Accueil";
     require "./src/common/template.php";
-    
 ?>
 
 
@@ -30,8 +29,8 @@
         <a href="#">Vlog</a>
         <a href="#">Actualités</a>
         <a href="#">Cinéma</a>
-        <a href="#">Event</a>
         <a href="#">Gaming</a>
+        <a href="#">Event</a>
     </div>
     <div class="allart">
         <div class="article"><a href="./src/page/article.php">1</a></div>

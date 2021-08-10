@@ -35,77 +35,67 @@ function dbCheckRegister ($email, $login) {
 
 function login($pseudo, $mdp) {
 
-    // connection à la db
-    $bdd = dbAccess();
+        $bdd = dbAccess();
 
-    // requete pour récupérer l'user correspondant au login entré
-    $requete = $bdd->query("SELECT * FROM users u INNER JOIN role e ON e.roleId = u.roleId");
+        $requete = $bdd->query("SELECT * FROM users u INNER JOIN role r ON r.roleId = u.roleId;");
 
-    // Traitement de la requete
-    while($données = $requete->fetch()) {
+        while($donnees = $requete->fetch()) {   
 
-        if($données["login"] == $pseudo){
-            
-            $sel = md5($mdp) . $données["ban"];
-            
-            
-            if($données["mdp"] == $sel){
+            if($donnees["login"] == $pseudo) {
 
-                $_SESSION["connect"] = true;
+                // sel du mdp envoyé avec le sel contenu dans la colonne ban
 
-                $_SESSION["user"] = [
+                $sel = md5($mdp) . $donnees["ban"];
 
-                    "id" => $données["userId"],
+                if($donnees["mdp"] == $sel) {
 
-                    "nom" => $données["nom"],
+                    //$_SESSION["connect"] = true;
 
-                    "prenom" => $données["prenom"],
+                    $_SESSION["user"] = [
 
-                    "login" => $données["login"],
+                        "id" => $donnees["userId"],
 
-                    "email" => $données["email"],
+                        "nom" => $donnees["nom"],
 
-                    "role" => $données["nomRole"]
+                        "prenom" => $donnees["prenom"],
 
-                ];
+                        "login" => $donnees["login"],
 
-            // J'active la session connecté
+                        "email" => $donnees["email"],
 
-            $_SESSION["connecté"] = true;
+                        "role" => $donnees["nomRole"]
 
-            // Je redirige vers la page account
+                    ];
 
-            header("location: ../../src/page/index.php");
+                    // J'active la session connecté
 
-            exit();
+                    $_SESSION["connecté"] = true;
+
+                    // Je redirige vers la page accueuil
+
+                    header("location: ../../src/page/index.php");
+
+                    exit();
+
+                }
+
+                else {                  
+
+                    header("location: ../../src/page/login.php?erreur=true&msg=Le mot de passe est incorrect!");
+
+                    exit();
+
+                }
+
+            }
 
         }
-        
-        else{
-            
-            
-            
-            header("location: ../../src/page/login.php?erreur=Mot de passe incorrect");
-            
-            exit();
-            
-        }
-        
-        
-        }
+
+        $requete->closeCursor();
+
+        header("location: ../../src/page/login.php?erreur=true&msg=Le pseudo est incorrect!");
+
+        exit();
+
     }
-    //J'active ma session user avec les infos dont je pourrai avoir besoin            
-    // tant que mon utilisateur est connecté 
-
-
-    // J'active la session connecté
-
-
-    // Je redirige vers la page account
-
-
-    // Si mon script arrive ici, il est sorti de ma boucle sans trouver de user
-
-
-}
 ?>

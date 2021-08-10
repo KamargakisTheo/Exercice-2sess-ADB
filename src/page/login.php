@@ -16,7 +16,13 @@
 <body>
 
 <section class="formulaire">
-    <form action="" method="post">
+    <form action="" method="post" class="login">
+        <?php
+        if(isset($_GET["erreur"]) && $_GET["erreur"] == true) {
+            echo "<h2>" . $_GET["msg"] . "</h2>";
+        }
+
+        ?>
         <table>
             <thead>
                 <tr>

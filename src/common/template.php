@@ -10,6 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/style/style.css">
     <link rel="stylesheet" href="../../src/style/formulaire.css">
+    <link rel="stylesheet" href="../../src/style/account.css">
+    <link rel="stylesheet" href="../../src/style/admin.css">
     <title><?=$title?></title>
 </head>
 <body>
