@@ -43,7 +43,7 @@
                         ?>
 
 <?php
-                        if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
+                        if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Modérateur" || isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
                             ?>
                         <li><a href="../../src/page/admin.php">Administration</a></li>
                         <?php

@@ -62,4 +62,20 @@
 
         $requete->closeCursor();
     }
+
+    function dbDeleteCategorie($deleteCategorie) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("DELETE FROM categoriearticle WHERE categorieArticleId = ?");
+        $requete->execute(array($deleteCategorie)) or die (print_r($requete->errorInfo(), true));
+        $requete->closeCursor();
+    }
+
+
+    function dbAddCategorie($addCategorie) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("INSERT INTO categoriearticle(NomCategorie) VALUES (?)");
+        $requete->execute(array($addCategorie)) or die (print_r($requete->errorInfo(), true));
+        $requete->closeCursor();
+    }
+    
 ?>

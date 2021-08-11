@@ -42,3 +42,13 @@
     color: aliceblue;
 
 }
+
+.btnsupp {
+    text-decoration: none;
+}
+
+.btnadd {
+    text-decoration: none;
+    color: rgb(60, 175, 60);
+
+}
