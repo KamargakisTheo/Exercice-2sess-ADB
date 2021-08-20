@@ -33,7 +33,7 @@
 
     function dbListeUser() {
         $bdd = dbAccess();
-        $requete = $bdd->query("SELECT * FROM users") or die (print_r($requete->errorInfo(), true));
+        $requete = $bdd->query("SELECT * FROM users u INNER JOIN role r ON r.roleId = u.roleId;") or die (print_r($requete->errorInfo(), true));
 
         while ($donnée = $requete->fetch()) {
 
@@ -77,5 +77,14 @@
         $requete->execute(array($addCategorie)) or die (print_r($requete->errorInfo(), true));
         $requete->closeCursor();
     }
-    
+
+
+    function dbDeleteUser($deleteUser) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("DELETE FROM users WHERE userId = ?");
+        $requete->execute(array($deleteUser)) or die (print_r($requete->errorInfo(), true));
+        $requete->closeCursor();
+    }
+
+        
 ?>

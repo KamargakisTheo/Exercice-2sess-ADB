@@ -13,7 +13,9 @@ session_start();
     <link rel="stylesheet" href="../../src/style/formulaire.css">
     <link rel="stylesheet" href="../../src/style/account.css">
     <link rel="stylesheet" href="../../src/style/admin.css">
-    <title><?=$title?></title>
+    <link rel="icon" type="image/png" sizes="16x16" href="../../src/img/logo.png">
+    <title><?=$title?></title> 
+    <script src="https://cdn.tiny.cloud/1/3ksskp8qn37ky65qxtaehjx9zg6pxdpfi0tldelpjkmqjiux/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <?php

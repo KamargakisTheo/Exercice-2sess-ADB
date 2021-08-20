@@ -11,8 +11,9 @@
 
 <nav>
     <div id="acceuil">
-        <a href="../../index.php">Accueil</a>
+        <a href="../../index.php">Acceuil</a>
     </div>
+    
 
 
     <div class="menu">
@@ -37,7 +38,7 @@
                     <?php
                         if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Modérateur" || isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
                             ?>
-                        <li><a href="../../src/page/redigeArticle.php">Rediger article</a></li>
+                        <li><a href="../../src/page/redactionArticle.php">Rediger article</a></li>
                         <?php
                         }
                         ?>

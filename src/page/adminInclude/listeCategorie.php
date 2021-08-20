@@ -21,7 +21,7 @@
             $addCategorie = htmlspecialchars($_POST["addCat"]);
     
             dbAddCategorie($addCategorie);
-            
+
             header("location: ../../src/page/admin.php?choix=listeCategorie");
 
             exit();
@@ -54,7 +54,7 @@
             if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
         ?>
             <td>
-            <a href="../../src/page/admin.php?choix=listeCategorie&deleteCat=true&value=<?=$value["categorieArticleId"]?>/#catego" class="btnsupp">💣</a>
+            <a href="../../src/page/admin.php?choix=listeCategorie&deleteCat=true&value=<?=$value["categorieArticleId"]?>/#catego" class="btnsupp">&#128163;</a>
             </td>
         <?php
         }
@@ -66,7 +66,8 @@
 ?>
 
     <?php
-            if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
+        if(isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] == "Admin") {
+            
     ?>
 
     <form action=""  method="post">

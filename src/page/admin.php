@@ -3,6 +3,7 @@
     require "../../src/common/template.php";
     require "../../src/function/dbFunction.php";
     require "../../src/function/dbAdmin.php";
+
 ?>
 
 
