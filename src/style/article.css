@@ -1,0 +1,83 @@
+/*Redaction Article*/
+.formulaireRedaction {
+    margin: 5em 30em;
+    padding: 1em;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: aliceblue;
+}
+
+
+/* Page article */
+.mainArticle {
+    margin: 3em 15em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    color: aliceblue;
+}
+
+.mainArticle > div > h2 {
+    padding: 1em;
+    color: rgb(156, 237, 252);
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(206,89,55,0);
+}
+
+.imgArticleIn {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 2px;
+    width: 25em;
+}
+
+.ImgArticleOut {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenuArticle {
+    padding: 1em 5em;
+}
+
+.titrenautre {
+    padding: 1em;
+    text-align: center;
+}
+
+/*Commentaire*/
+
+.comment {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.listeComment {
+    padding: 1em;
+    text-align: center;
+}
+
+.commLogin {
+    background-color: rgba(194, 54, 54, 0.5);
+    padding: 5px;
+    border: double 5px rgb(0, 0, 0);
+}
+
+#peudocom {
+    color: rgb(156, 237, 252);
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}

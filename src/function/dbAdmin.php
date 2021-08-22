@@ -17,7 +17,8 @@
 
     function dbListeArticle() {
         $bdd = dbAccess();
-        $requete = $bdd->query("SELECT * FROM articles") or die (print_r($requete->errorInfo(), true));
+        $requete = $bdd->query("SELECT * FROM articles a INNER JOIN categoriearticle c ON c.categorieArticleId = a.categorieArticleId
+                                                         INNER JOIN users u ON u.userId = a.auteurId") or die (print_r($requete->errorInfo(), true));
 
         while ($donnée = $requete->fetch()) {
 
@@ -49,7 +50,7 @@
 
     function dbListeCommentaire() {
         $bdd = dbAccess();
-        $requete = $bdd->query("SELECT * FROM commentaire") or die (print_r($requete->errorInfo(), true));
+        $requete = $bdd->query("SELECT * FROM commentaire c INNER JOIN users u ON u.userId = c.userId") or die (print_r($requete->errorInfo(), true));
 
         while ($donnée = $requete->fetch()) {
 
@@ -83,6 +84,20 @@
         $bdd = dbAccess();
         $requete = $bdd->prepare("DELETE FROM users WHERE userId = ?");
         $requete->execute(array($deleteUser)) or die (print_r($requete->errorInfo(), true));
+        $requete->closeCursor();
+    }
+
+    function dbDeleteArticle($deleteArticle) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("DELETE FROM articles WHERE articleId = ?");
+        $requete->execute(array($deleteArticle)) or die (print_r($requete->errorInfo(), true));
+        $requete->closeCursor();
+    }
+
+    function dbDeleteComment($deleteComment) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("DELETE FROM commentaire WHERE commentaireId = ?");
+        $requete->execute(array($deleteComment)) or die (print_r($requete->errorInfo(), true));
         $requete->closeCursor();
     }
 

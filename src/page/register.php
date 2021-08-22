@@ -66,35 +66,9 @@
   
               exit();
 
-            /* //boolen de controle
-            // $mdpfalse = true;
-            // j'active une session pour dire que les mdp sont pas correct
-            $_SESSION["mdpfalse"] = true;
-            //recharger ma page
-            header("location: ../../src/page/register.php?error=true&msg=Le mot de passe est incorrect");
-            exit(); */
-
         }
         
         dbCheckRegister($email, $login);
-
-        
-        
-        /* $bdd = dbAccess();
-        $requete = $bdd->prepare("SELECT COUNT (*) AS x FROM users WHERE email = ? OR login = ? ");
-        $requete->execute(array($email, $login)) or die (print_r($requete->errorInfo(), true));
-
-        while($result = $requete->fetch()) {
-
-            if ($result["x"] != 0) {
-
-                $accountExist = true;
-                
-                header("location: ../../src/page/register.php?errorAccount=true&message=Le login et/ou l'email existe déja.");
-
-                exit();
-            }
-        } */
 
         dbRegister($nom, $prenom, $login, $email, $mdpToSend, $clef, $roleId, $sel);
 
@@ -128,13 +102,6 @@
 
                 echo "<h2>" . $_GET["msg"] . "</h2>";
             }
-
-            
-
-        
-           /*  if (isset($_GET["error"]) && $_GET["error"] == true) {
-                echo "<h2>".$_GET['msg']."</h2>";
-            } */
         ?>
         <table>
             <thead>
@@ -167,10 +134,6 @@
                     <td>Mot de passe : </td>
                     <td><input type="password" name="mdp2" require placeholder="Retapez votre mot de passe."></td>
                 </tr>
-<!--                 <tr>
-                    <td>Uploader un avatar: </td>
-                    <td><input type="file" name="avatar"></td>
-                </tr> -->
                 <tr>
                     <td><input type="submit" value="Création du compte" class="send"></td>
                 </tr>       

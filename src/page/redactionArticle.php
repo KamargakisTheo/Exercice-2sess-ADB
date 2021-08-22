@@ -27,10 +27,30 @@
         dbSendArticle($titre, $imgUrl, $contenu, $auteurId, $categorieArticleId, $onTop);
 
     }
+
+
 ?>
 
+<section class="tampon">
+    <div>
+            <a href="../../src/page/redactionArticle.php?choix=uploaderPhoto" class="buttonTampon">Uploader photo</a> 
+            <a href="../../src/page/redactionArticle.php?choix=redigerArticle&lien=memoireTampon" class="buttonTampon">Afficher le tampon</a>
+    </div>
+    <?php
+    if(isset($_GET["choix"]) && $_GET["choix"] == "redigerArticle")
+    {
+        require "../../src/page/articleInclude/imgTampon.php";
+    }
+    if(isset($_GET["choix"]) && $_GET["choix"] == "uploaderPhoto")
+    {
+
+        require "../../src/page/articleInclude/moduleUploadFichier.php";
+    }
+    ?>
+</section>
+
 <!-- Formulaire de création d'article -->
-<section class="formulaire">
+<section class="formulaireRedaction">
     <form action="" method="post" enctype="multipart/form-data">
         <p>Titre de votre article:</p>
         <input type="text" name="titre" required>
@@ -44,7 +64,6 @@
             <tr>
                 <td>
                     <select name="NomCategorie">
-                        <option value="">-- Choisisez la catégorie</option>
                     <?php 
                         for ($i=0; $i < count($listeTypeArticle) ; $i++) { 
                         ?>
@@ -59,8 +78,8 @@
             </tr>
         </table>
         <p>Composer votre article</p>
-        <textarea name="contenu" id="contenu"></textarea>
-        <input class="btnTampon" type="submit" value="Envoyez votre article">
+        <textarea name="contenu"></textarea>
+        <input type="submit" value="Envoyez votre article">
     </form>
 </section>
 

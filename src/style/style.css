@@ -12,11 +12,11 @@ body {
 }
  /*Nav*/
 nav{
-    background-color: rgba(174, 252, 255, 0.9);
+    animation: bg-pan-left 8s infinite both;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    border-bottom: 4px ridge #245FA4;
 }
 
 nav a {
@@ -47,7 +47,10 @@ nav a {
 
 
 nav a:hover{
-    background: rgb(51, 182, 189);
+    background: #245FA4;
+    transition: 0.3s;
+    border-radius: 3px;
+    color: rgb(174, 252, 255);
 }
 
 
@@ -64,25 +67,40 @@ nav a:hover{
     align-items: center;
 }
 
+.newsontop{
+    text-decoration: none;
+    color: rgb(226, 251, 255);
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(206,89,55,0);
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1px;
+    border-radius: 5px;
+}
+
 .firstnews {
     text-align: center;
-    background-color: bisque;
-    height: 6rem;
-    width: 12rem;
+    height: 10rem;
+    width: 15rem;
+    border: 4px solid rgb(0, 0, 0);
 }
 
 .secondnews {
     text-align: center;
-    background-color: rgb(235, 192, 99);
-    height: 3rem;
-    width: 12rem;
+    height: 5rem;
+    width: 15rem;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .thirdnews {
     text-align: center;
-    background-color: rgb(247, 158, 56);
-    height: 3rem;
-    width: 12rem;
+    height: 5rem;
+    width: 15rem;
+    border: 2px solid rgb(31, 31, 31);
+}
+
+.errorMessage {
+    text-align: center;
+    color: rgb(216, 178, 252);
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(206,89,55,0);
 }
 
 /*article et list categorie*/
@@ -97,14 +115,42 @@ nav a:hover{
     justify-content: space-around;
 }
 
-.article {
-    background: plum;
-    margin: 7em;
-    width: 10em;
-    height: 10em;
-    text-align: center;
-    
+.art {
+    margin: 2em;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.art > div {
+    color: aliceblue;
+    text-align: center;
+}
+
+.art > div > a{
+    text-decoration: none;
+    color: rgb(156, 237, 252);
+    text-align: center;
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(206,89,55,0);
+}
+
+.art > div > a:hover{
+    color: #245FA4;
+    transition: 0.3s;
+}
+
+.imgArticle {
+    width: 300px;
+    height: 150px;
+    border-radius: 5px;
+    border: solid #245FA4;
+    object-fit: cover;
+}
+
 
 .listecategorie > a {
     text-decoration: none;
@@ -113,11 +159,36 @@ nav a:hover{
     margin: 1em;
     padding: 10px;
     color: rgb(233, 255, 133);
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(206,89,55,0);
 }
 
 .listecategorie > a:hover{
     background: plum;
     border-radius: 1em;
+    transition: 0.3s;
+    
+}
+
+/*tampon*/
+.tampon{
+    padding: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.buttonTampon {
+    text-decoration: none;
+    color: rgb(38, 92, 102);
+    padding: 13px;
+    background: rgb(142, 219, 233);
+    border-radius: 1em;
+}
+
+.buttonTampon:hover {
+    color: rgb(142, 219, 233);
+    background: rgb(38, 92, 102);
+    transition: 0.3s;
 }
 
 /*footer*/
@@ -125,9 +196,25 @@ nav a:hover{
 footer{
     text-align: center;
     padding: 1rem;
-    background-color: rgb(145, 217, 219);
+    animation: bg-pan-left 8s infinite both;
+    border-top: 4px ridge #245FA4;
 }
 
 footer > p{
     color: black;
+}
+
+@keyframes bg-pan-left {
+    0% {
+        background-color: rgb(142, 219, 233);
+        background-position: 100% 50%;
+    }
+    50% {
+        background-color: #245FA4;
+        background-position: 0% 50%;
+    }
+    100%{
+        background-color: rgb(142, 219, 233);
+        background-position: 100% 50%;
+    }
 }

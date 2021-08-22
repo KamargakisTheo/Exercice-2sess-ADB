@@ -9,9 +9,9 @@
     }
 ?>
 
-<nav>
+<nav class="bg-pan-left">
     <div id="acceuil">
-        <a href="../../index.php">Acceuil</a>
+        <a href="../../index.php">Accueil</a>
     </div>
     
 

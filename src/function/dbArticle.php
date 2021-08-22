@@ -5,15 +5,16 @@
         //Traitement de l'image envoyée
         $traiterImage = dbSendImg($imgUrl, "article");
 
+       
         //Récuperer l'id de la catégorie d'article qui correspond à la selection de l'auteur
-        $arrayCategorieId = dbListeCategorie($categorieArticleId);
+        $arrayCategorieId = selectCategorieArticle($categorieArticleId);
         //J'envoie l'index récupéré dans une nouvelle variable
-        $categorieArticleId = intval($arrayCategorieId[0][0]);
+        $categorieId = intval($arrayCategorieId[0][0]);
         // Envoyer article dans db
         $bdd = dbAccess();
         $requete = $bdd->prepare('INSERT INTO articles(titre, imgUrl, contenu, auteurId, categorieArticleId, onTop)
                                   VALUES(?, ?, ?, ?, ?, ?)');
-        $requete->execute(array($titre, $traiterImage, $contenu, $auteurId, $categorieArticleId, $onTop)) or die(print_r($requete->errorInfo(), TRUE));
+        $requete->execute(array($titre, $traiterImage, $contenu, $auteurId, $categorieId, $onTop)) or die(print_r($requete->errorInfo(), TRUE));
         $requete->closeCursor();
         // Vérifier si star est actif ou pas
         if ($onTop == 1) {
@@ -66,4 +67,65 @@
         $requete->closeCursor();
     }
 
+    function selectCategorieArticle($categorieArticle) {
+        $bdd = dbAccess();
+        $requete = $bdd->prepare(" SELECT categorieArticleId FROM categoriearticle WHERE NomCategorie = ? ");
+        $requete->execute(array($categorieArticle)) or die(print_r($requete->errorInfo(), TRUE));
+        while ($données = $requete->fetch()) {
+            $categorieArticleId[] = $données;
+        }
+
+        $requete->closeCursor();
+        return $categorieArticleId;
+
+
+    }
+
+    function getArticle(){
+        $bdd = dbAccess();
+        $requete = $bdd->query("SELECT * FROM articles ORDER BY articleId DESC LIMIT 12") or die(print_r($requete->errorInfo(), TRUE));
+        while($données = $requete->fetch()){
+            $listeArticle[] = $données;
+        }
+        $requete->closeCursor();
+        return $listeArticle;
+    }
+
+    function getArticleOnTop() {
+        $bdd = dbAccess();
+        $requete = $bdd->query("SELECT * FROM articles a INNER JOIN users u ON u.userId = a.auteurId
+                                                        INNER JOIN categoriearticle c ON c.categorieArticleId = a.categorieArticleId
+                                                        INNER JOIN misenavant m ON m.articleId = a.articleId
+                                                        WHERE m.articleId = a.articleId
+                                                        ORDER BY onTop DESC LIMIT 3") or die(print_r($requete->errorInfo(), TRUE));
+        while($données = $requete->fetch()){
+            $listOnTop[] = $données;
+        }
+        $requete->closeCursor();
+        if (isset($listOnTop)) {
+            return $listOnTop;
+        }
+    }
+
+    function getArticleContent($id){
+        $bdd = dbAccess();
+        $requete = $bdd->prepare("SELECT a.titre, a.imgUrl, a.contenu, c.NomCategorie, u.nom AS auteurNom, u.prenom AS auteurPrenom
+                                  FROM articles a
+                                  INNER JOIN categoriearticle c ON c.categorieArticleId = a.categorieArticleId
+                                  INNER JOIN users u ON u.userId = a.auteurId
+                                  WHERE a.articleId = ?");
+        $requete->execute(array($id))or die(print_r($requete->errorInfo(), TRUE));
+        while($données = $requete->fetch()){
+            $contenuArticle[] = $données;
+        }
+        $requete->closeCursor();
+
+        if (isset($contenuArticle)) {
+            return $contenuArticle;
+        } else {
+            header('location: ../../index.php?error=true&message=Article inexistant !');
+        }
+    }
+
+    
 ?>
